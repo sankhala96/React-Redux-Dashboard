@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import './LoginPage.css';
 import { Link } from 'react-router-dom';
 
-let LoginPage = ({ dispatch }) => {
+let RegisterPage = ({ dispatch }) => {
     const [values, updateValues] = useState({
         email: '',
+        userName: '',
         password: '',
     });
 
@@ -21,6 +22,7 @@ let LoginPage = ({ dispatch }) => {
 
         updateValues({
             email: '',
+            userName: '',
             password: '',
         })
         console.log(values)
@@ -35,8 +37,17 @@ let LoginPage = ({ dispatch }) => {
                         <input
                             placeholder='Enter Email'
                             name='email'
-                            onChange={handleChange}
                             value={values.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className='form-field'>
+                        <span>User Name</span>
+                        <input
+                            placeholder='Enter User Name'
+                            name='userName'
+                            value={values.userName}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className='form-field'>
@@ -52,8 +63,8 @@ let LoginPage = ({ dispatch }) => {
                     <div className='form-field-button'>
                         <button type='submit'>Login</button>
                         <div className='form-redirect'>
-                            <span>New User?</span>
-                            <Link to='/register'>Register</Link>
+                            <span>Already a User?</span>
+                            <Link to='/login'>Login</Link>
                         </div>
                     </div>
                 </form>
@@ -77,6 +88,6 @@ const mapStateToProps = state => {
 //     }
 // }
 
-LoginPage = connect(mapStateToProps, {})(LoginPage)
+RegisterPage = connect(mapStateToProps, {})(RegisterPage)
 
-export default LoginPage;
+export default RegisterPage;
