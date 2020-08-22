@@ -80,6 +80,13 @@ export const login = ({ email, password }) => dispatch => {
         })
 }
 
+// Logout
+export const logout = () => {
+    return {
+        type: LOGOUT_SUCCESS
+    }
+}
+
 export const tokenConfig = getState => {
     
     //Get token from localstorage

@@ -7,7 +7,7 @@ const auth = require('../middlewares/auth');
 
 const User = require('../modals/User');
 
-// Register new user
+// Login User
 router.post('/', (req, res) => {
     const { email, password } = req.body;
 

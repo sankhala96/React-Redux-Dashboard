@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import './LoginPage.css';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { login } from '../actions/authActions';
 import { clearError } from '../actions/errorActions';
 
 let LoginPage = (props) => {
+    const history = useHistory();
     const [values, updateValues] = useState({
         email: '',
         password: '',
@@ -33,15 +34,6 @@ let LoginPage = (props) => {
         }
     }, [props.error])
 
-
-    // Redirect to dashboard on successful register
-    useEffect(() => {
-        if(props.isAuthenticated) {
-            props.clearError()
-            return <Redirect to={`/register`} />
-        }
-    }, [props.isAuthenticated])
-
     const handleChange = (e) => {
         updateValues({
             ...values,
@@ -57,6 +49,11 @@ let LoginPage = (props) => {
             email: '',
             password: '',
         })
+    }
+
+    if(props.isAuthenticated) {
+        props.clearError()
+        history.push(`/${props.user.userName}`);
     }
 
     return (
