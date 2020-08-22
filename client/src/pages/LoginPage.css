@@ -12,9 +12,13 @@
     padding: 15px;
     border: 1px solid rgba(0,0,0,0.75);
     border-radius: 2px;
-    height: 37vh;
+    height: 40vh;
     background-color: #fff;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.error-msg {
+    color: red;
 }
 
 .form-field {

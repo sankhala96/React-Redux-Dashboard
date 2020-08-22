@@ -1,13 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import './LoginPage.css';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-let LoginPage = ({ dispatch }) => {
+import { login } from '../actions/authActions';
+import { clearError } from '../actions/errorActions';
+
+let LoginPage = (props) => {
     const [values, updateValues] = useState({
         email: '',
         password: '',
     });
+    const [ errorMsg, setError ] = useState(null)
+
+    const prevErrorRef = useRef(props.error)
+    
+    // Clear Error on mount
+    useEffect(() => {
+        props.clearError()
+    },[])
+
+    // Set Error on Prop change
+    useEffect(() => {
+        if(props.error !== prevErrorRef) {
+            // Check for Register Error
+            if(props.error.id === 'LOGIN_FAIL') {
+                setError(props.error.msg);
+            }
+            else {
+                setError(null);
+            }
+        }
+    }, [props.error])
+
+
+    // Redirect to dashboard on successful register
+    useEffect(() => {
+        if(props.isAuthenticated) {
+            props.clearError()
+            return <Redirect to={`/register`} />
+        }
+    }, [props.isAuthenticated])
 
     const handleChange = (e) => {
         updateValues({
@@ -19,16 +52,17 @@ let LoginPage = ({ dispatch }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        props.login(values)
         updateValues({
             email: '',
             password: '',
         })
-        console.log(values)
     }
 
     return (
         <div className='auth-page'>
             <div className='auth-page-container'>
+                { errorMsg ? <span className="error-msg">{errorMsg}</span> : null }
                 <form onSubmit={handleSubmit}>
                     <div className='form-field'>
                         <span>Email</span>
@@ -65,18 +99,11 @@ let LoginPage = ({ dispatch }) => {
 const mapStateToProps = state => {
     return {
       isAuthenticated: state.auth.isAuthenticated,
+      user: state.auth.user,
       error: state.error
     }
-  }
-  
-// const mapDispatchToProps = dispatch => {
-//     return {
-//       onTodoClick: id => {
-//         dispatch(toggleTodo(id))
-//       }
-//     }
-// }
+}
 
-LoginPage = connect(mapStateToProps, {})(LoginPage)
+LoginPage = connect(mapStateToProps, { login, clearError })(LoginPage)
 
 export default LoginPage;
