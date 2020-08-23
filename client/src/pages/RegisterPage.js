@@ -11,16 +11,12 @@ let RegisterPage = (props) => {
     const [values, updateValues] = useState({
         email: '',
         userName: '',
+        fullName: '',
         password: '',
     });
     const [ errorMsg, setError ] = useState(null)
 
     const prevErrorRef = useRef(props.error)
-    
-    // Clear Error on mount
-    useEffect(() => {
-        props.clearError()
-    },[])
 
     // Set Error on Prop change
     useEffect(() => {
@@ -62,7 +58,7 @@ let RegisterPage = (props) => {
 
     return (
         <div className='auth-page'>
-            <div className='auth-page-container'>
+            <div className='auth-page-container register'>
                 { errorMsg ? <span className="error-msg">{errorMsg}</span> : null }
                 <form onSubmit={handleSubmit}>
                     <div className='form-field'>
@@ -80,6 +76,15 @@ let RegisterPage = (props) => {
                             placeholder='Enter User Name'
                             name='userName'
                             value={values.userName}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className='form-field'>
+                        <span>Full Name</span>
+                        <input
+                            placeholder='Enter Full Name'
+                            name='fullName'
+                            value={values.fullName}
                             onChange={handleChange}
                         />
                     </div>

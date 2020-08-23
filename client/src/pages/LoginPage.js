@@ -15,11 +15,6 @@ let LoginPage = (props) => {
     const [ errorMsg, setError ] = useState(null)
 
     const prevErrorRef = useRef(props.error)
-    
-    // Clear Error on mount
-    useEffect(() => {
-        props.clearError()
-    },[])
 
     // Set Error on Prop change
     useEffect(() => {

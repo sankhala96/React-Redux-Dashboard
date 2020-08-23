@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
+import LoadingComponent from './components/LoadingComponent';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
@@ -12,6 +13,12 @@ const App = (props) => {
     props.loadUser();
   }, [])
 
+  if(props.isLoading) {
+    return (
+      <LoadingComponent />
+    )
+  }
+  
   return (
     <BrowserRouter>
       <Switch>
@@ -28,6 +35,7 @@ const App = (props) => {
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
+    isLoading: state.auth.isLoading,
     user: state.auth.user,
   }
 }

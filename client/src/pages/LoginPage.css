@@ -12,9 +12,13 @@
     padding: 15px;
     border: 1px solid rgba(0,0,0,0.75);
     border-radius: 2px;
-    height: 40vh;
+    height: 35vh;
     background-color: #fff;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.register {
+    height: 50vh;
 }
 
 .error-msg {
@@ -49,6 +53,7 @@
     border: 1px solid #2f93d6;
     border-radius: 5px;
     color: #fff;
+    cursor: pointer;
 }
 
 .form-redirect {

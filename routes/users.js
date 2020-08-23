@@ -8,9 +8,9 @@ const User = require('../modals/User');
 
 // Register new user
 router.post('/', (req, res) => {
-    const { userName, email, password } = req.body;
+    const { userName, fullName, email, password } = req.body;
 
-    if(!userName || !email || !password) {
+    if(!userName || !fullName || !email || !password) {
         res.status(400)
         res.json({ msg: 'Please enter all fields' });
         return;
@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
         
             const newUser = new User({
                 userName,
+                fullName,
                 email,
                 password
             });
@@ -51,6 +52,7 @@ router.post('/', (req, res) => {
                                         user: {
                                             id: user.id,
                                             userName: user.userName,
+                                            fullName: user.fullName,
                                             email: user.email
                                         }
                                     })
