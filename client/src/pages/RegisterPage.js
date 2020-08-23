@@ -15,8 +15,7 @@ let RegisterPage = (props) => {
         password: '',
     });
     const [ errorMsg, setError ] = useState(null)
-
-    const prevErrorRef = useRef(props.error)
+    const prevErrorRef = useRef(props.error);
 
     // Set Error on Prop change
     useEffect(() => {

@@ -1,0 +1,52 @@
+.posts {
+    width: 55%;
+    border: 1px solid #ddd;
+    height: 71vh;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #dddddd9c;
+    margin-right: 15px;
+}
+
+.post-search {
+    margin-top: 15px;
+}
+
+.post-search input {
+    margin: 0 10px;
+    padding: 4px 10px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.post-search button {
+    padding: 2px 10px;
+    cursor: pointer;
+}
+
+.post-list {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 30px;
+    overflow: auto;
+}
+
+.infinite-scroll-component::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.post-list ul {
+    list-style: none;
+    padding: 0px;
+    margin: 10px 15px;
+}
+
+.post-item {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

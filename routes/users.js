@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
 
+const auth = require('../middlewares/auth');
 const User = require('../modals/User');
 
 // Register new user
@@ -53,7 +54,8 @@ router.post('/', (req, res) => {
                                             id: user.id,
                                             userName: user.userName,
                                             fullName: user.fullName,
-                                            email: user.email
+                                            email: user.email,
+                                            status: user.status
                                         }
                                     })
                                 }
@@ -63,5 +65,39 @@ router.post('/', (req, res) => {
             })
         })
 });
+
+// Get all User
+router.get('/allUsers', auth, (req, res) => {
+    User.find()
+        .then(users => {
+            res.status(200);
+            res.json(users);
+        })
+        .catch(err => {
+            res.status(401);
+            res.json({ msg: err });
+        })
+})
+
+// Edit User Profile
+router.post('/updateProfile', auth, (req, res) => {
+    const { fullName, status } = req.body;
+    User.findByIdAndUpdate(req.user.id, { fullName, status }, {new: true}, (err, user) => {
+        if (err) throw err;
+        else {
+            res.status(200)
+            res.json({ 
+                msg: 'Update Success',
+                user: {
+                    id: user.id,
+                    userName: user.userName,
+                    fullName: user.fullName,
+                    email: user.email,
+                    status: user.status
+                }
+            });
+        }
+    });
+})
 
 module.exports = router;

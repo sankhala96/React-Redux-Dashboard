@@ -1,0 +1,10 @@
+.content {
+    display: flex;
+    margin: 20px;
+}
+
+.footer {
+    background-color: #222;
+    height: 10vh;
+    margin-top: 26px;
+}

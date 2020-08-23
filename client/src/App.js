@@ -28,6 +28,7 @@ const App = (props) => {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/:userName" render={() => props.isAuthenticated ? (<DashboardPage />) : (<Redirect to="/login" />)} />
+        <Route exact path="/:userName/edit" render={() => props.isAuthenticated ? (<DashboardPage />) : (<Redirect to="/login" />)} />
       </Switch>
     </BrowserRouter>
   );

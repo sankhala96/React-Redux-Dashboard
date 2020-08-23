@@ -20,6 +20,10 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    status: {
+        type: String,
+        default: 'Available'
+    }
 });
 
 module.exports = User = mongoose.model('user', UserSchema);
