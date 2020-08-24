@@ -30,7 +30,7 @@ const Posts = ( props ) => {
     }, [])
 
     const filterPosts = () => {
-        const filteredPosts = postsArr.filter((post) => {
+        const filteredPosts = props.posts.filter((post) => {
             return post.body.includes(searchKey);
         });
 
@@ -41,7 +41,9 @@ const Posts = ( props ) => {
         const value = start + 5;
         updateCount(value);
 
-        props.getPosts(value);
+        setTimeout(() => {
+            props.getPosts(value);
+        }, 2000);
     }
 
     return (
@@ -56,7 +58,7 @@ const Posts = ( props ) => {
                 <button onClick={filterPosts}>Go</button>
             </div>
             <div className='post-list'>
-                <InfiniteScroll
+                {postsArr.length ? <InfiniteScroll
                     dataLength={postsArr.length}
                     next={onScroll}
                     hasMore={true}
@@ -67,6 +69,7 @@ const Posts = ( props ) => {
                     return <Card key={`${post}-${idx}`} post={post} />
                 })}
                 </InfiniteScroll>
+                : <span>No Posts</span>}
             </div>
         </div>
     )
